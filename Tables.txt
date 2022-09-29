@@ -1,0 +1,75 @@
+create table admin(
+id int primary key auto_increment,
+name varchar(20) not null,
+email varchar(30) not null unique,
+password varchar(20) not null
+);
+
+mysql> desc admin;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| email    | varchar(30) | NO   | UNI | NULL    |                |
+| password | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+insert into admin (name,email,password) values("admin","admin@gmail.com","admin");
+
+mysql> select * from admin;
++----+-------+-----------------+----------+
+| id | name  | email           | password |
++----+-------+-----------------+----------+
+|  1 | admin | admin@gmail.com | admin    |
++----+-------+-----------------+----------+
+
+create table engineers(
+id int primary key auto_increment,
+name varchar(20) not null,
+email varchar(30) not null unique,
+password varchar(20) not null,
+category varchar(20) not null
+);
+
+mysql> desc engineers;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| email    | varchar(30) | NO   | UNI | NULL    |                |
+| password | varchar(20) | NO   |     | NULL    |                |
+| category | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+
+create table employees(
+id int primary key auto_increment,
+name varchar(30) not null,
+email varchar(25) not null unique,
+password varchar(20) not null
+);
+
+mysql> desc employees;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(30) | NO   |     | NULL    |                |
+| email    | varchar(25) | NO   | UNI | NULL    |                |
+| password | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+create table tasks(
+id int primary key auto_increment,
+category varchar(20) not null
+);
+
+mysql> desc tasks;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| category | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
