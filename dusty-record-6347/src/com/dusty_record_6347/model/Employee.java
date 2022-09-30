@@ -1,10 +1,10 @@
 package com.dusty_record_6347.model;
 
 public class Employee {
-	int id;
-	String name;
-	String email;
-	String password;
+	private int id;
+	private String name;
+	private String email;
+	private String password;
 	
 	public Employee() {
 		super();

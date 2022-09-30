@@ -5,26 +5,30 @@ import java.util.Scanner;
 
 import com.dusty_record_6347.exceptions.AdminException;
 import com.dusty_record_6347.exceptions.EngineerException;
+import com.dusty_record_6347.exceptions.WorkException;
 import com.dusty_record_6347.model.Admin;
+import com.dusty_record_6347.model.AllTasks;
 import com.dusty_record_6347.model.Engineer;
+import com.dusty_record_6347.model.Tasks;
 import com.dusty_record_6347.repository.Repository;
 import com.dusty_record_6347.repository.RepositoryImpl;
 
 public class AdminUsecases {
-	public void adminLogin() {
+	public String adminLogin() { 
 		Scanner sc=new Scanner(System.in);
-		System.out.print("Enter email id : ");
+		System.out.println("Enter username");
 		String email=sc.next();
-		System.out.print("Enter password : ");
+		System.out.println("Enter password");
 		String passwd=sc.next();
-		sc.close();
-		Repository new_user=new RepositoryImpl();
+		String message=null;
+		Repository newUser=new RepositoryImpl();
 		try {
-			Admin admin=new_user.adminLogin(email, passwd);
-			System.out.println("Welcome "+admin.getName());
+			Admin admin=newUser.adminLogin(email, passwd);
+			message="Welcome "+admin.getName();
 		} catch (AdminException e) {
-			System.out.println(e.getMessage());
+			message=e.getMessage();
 		}
+		return message;
 	}
 	
 	public String addEnginner() {
@@ -37,7 +41,6 @@ public class AdminUsecases {
 		String pass=sc.next();
 		System.out.println("Enter engineer category :");
 		String cat=sc.next();
-		
 		Repository addEngineer=new RepositoryImpl();
 		
 		Engineer engineer =new Engineer();
@@ -57,7 +60,7 @@ public class AdminUsecases {
 			List<Engineer> list=getList.getListOfEngineer();
 			list.forEach(e ->System.out.println(e));
 		} catch (EngineerException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	public void deleteEngineer() {
@@ -67,6 +70,25 @@ public class AdminUsecases {
 		Repository delEngineer=new RepositoryImpl();
 		String res=delEngineer.removeEngineer(id);
 		System.out.println(res);
-		sc.close();
+	}
+	
+	public void seeTasks() {
+		Repository repo=new RepositoryImpl();
+		try {
+			List<AllTasks> list=repo.seeTasks();
+			list.forEach(w-> System.out.println(w));
+		} catch (WorkException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public void assignTasks() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter engineer id to assign task");
+		int eid=sc.nextInt();
+		System.out.println("Enter task id that you want to assign engineer");
+		int tid=sc.nextInt();
+		Repository repo=new RepositoryImpl();
+		String message=repo.assignTasks(eid, tid);
+		System.out.println(message);
 	}
 }

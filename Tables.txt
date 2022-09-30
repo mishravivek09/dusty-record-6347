@@ -62,8 +62,12 @@ mysql> desc employees;
 +----------+-------------+------+-----+---------+----------------+
 
 create table tasks(
-id int primary key auto_increment,
-category varchar(20) not null
+task_id int primary key auto_increment,
+category varchar(20) not null,
+status varchar(20) DEFAULT 'Pending',
+engid int,
+emid int not null,
+foreign key (emid) references employees(id)ON DELETE CASCADE
 );
 
 mysql> desc tasks;
@@ -73,3 +77,4 @@ mysql> desc tasks;
 | id       | int         | NO   | PRI | NULL    | auto_increment |
 | category | varchar(20) | NO   |     | NULL    |                |
 +----------+-------------+------+-----+---------+----------------+
+
